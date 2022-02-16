@@ -1,0 +1,90 @@
+stages:
+    - build
+    - deploy
+
+build:
+    stage: build
+    script:
+        - yarn install --network-concurrency 1
+        # replaces the correct config based on recognised branch (develop/training/prerelease/production)
+        - config-setup
+        - yarn build --production
+        # compress build/ node_modules/ as an artifact to pass to the next stage
+        - zip -rq build.zip build/
+        # persist binary symlinks - required when using node_modules in lint/test stages
+        #- zip --symlinks -rq node_modules.zip node_modules/
+    artifacts:
+        paths:
+            - build.zip
+            #- node_modules.zip
+        expire_in: 2880 mins
+    only:
+        - branches
+    tags:
+        - quick
+
+# DEPLOY TO DEVELOPMENT ACCOUNT
+deploy-dev:
+    stage: deploy
+    script:
+        - aws-setup
+        - unzip build.zip
+        - cd build
+        # deploy
+        - aws-s3-web-deploy s3://frontend.platform.dev.swoop.aero/rps2/
+    dependencies:
+        - build
+    only:
+        - develop
+    tags:
+        - quick
+
+# DEPLOY TO TRAINING ACCOUNT
+deploy-training:
+    stage: deploy
+    script:
+        - aws-setup
+        - unzip build.zip
+        - cd build
+        # deploy
+        - aws-s3-web-deploy s3://frontend.platform.training.swoop.aero/supervisor/
+    dependencies:
+        - build
+    only:
+        - training
+    tags:
+        - quick
+
+# DEPLOY TO PRERELEASE ACCOUNT
+deploy-prerelease:
+    stage: deploy
+    script:
+        - aws-setup
+        - unzip build.zip
+        - cd build
+        # deploy
+        - aws-s3-web-deploy s3://frontend.platform.prerelease.swoop.aero/supervisor/
+    dependencies:
+        - build
+    only:
+        - prerelease
+    tags:
+        - quick
+
+# DEPLOY TO PRODUCTION ACCOUNT WITH MANUAL TRIGGER
+deploy-production:
+    stage: deploy
+    script:
+        - aws-setup
+        - unzip build.zip
+        - cd build
+        # deploy
+        - aws-s3-web-deploy s3://frontend.platform.swoop.aero/supervisor/
+    dependencies:
+        - build
+    when: manual
+    allow_failure: false
+    only:
+        - production
+    tags:
+        - quick

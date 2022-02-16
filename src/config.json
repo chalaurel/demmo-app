@@ -1,0 +1,15 @@
+{
+    "baseUrl": "https://localhost:8082",
+    "baseApiUrl": "https://localhost:8082",
+    "pollingInterval": 5000,
+    "wss": {
+        "url": "wss://localhost:8082/rps",
+        "maxAttempts": 10
+    },
+    "connection": {
+        "frequencyCheck": 5,
+        "connectionTimeout": 4,
+        "maxConnectionFailedCheck": 2,
+        "enableHeartbeat": true
+    }
+}

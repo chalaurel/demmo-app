@@ -1,0 +1,23 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"],
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+        "no-prototype-builtins": "off",
+        "no-useless-escape": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "import/no-anonymous-default-export": "off",
+        "@typescript-eslint/ban-ts-comment": 1
+    },
+    "env": {
+        "browser": true,
+        "amd": true,
+        "node": true
+    }
+}

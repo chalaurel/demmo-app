@@ -1,0 +1,79 @@
+{
+    "name": "rps-v2",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@mui/icons-material": "^5.3.1",
+        "@mui/material": "^5.2.2",
+        "@mui/styles": "^5.2.2",
+        "@reduxjs/toolkit": "^1.6.2",
+        "@testing-library/jest-dom": "^5.11.4",
+        "@testing-library/react": "^11.1.0",
+        "@testing-library/user-event": "^12.1.10",
+        "@types/jest": "^26.0.15",
+        "@types/node": "^12.0.0",
+        "@types/react": "^17.0.0",
+        "@types/react-dom": "^17.0.0",
+        "aws-amplify": "3.4.3",
+        "aws-amplify-react": "4.1.9",
+        "classnames": "^2.3.1",
+        "ol": "^6.9.0",
+        "query-string": "^7.1.0",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-hook-form": "^7.22.5",
+        "react-redux": "^7.2.6",
+        "react-router-dom": "^6.0.2",
+        "react-scripts": "4.0.3",
+        "react-verification-code-input": "^1.2.9",
+        "redux": "^4.1.2",
+        "redux-persist": "^6.0.0",
+        "sharedlogin": "git+ssh://git@gitlab.tools.swoop.aero/platform/frontend/sharedlogin.git#v1.0.37",
+        "socket.io-client": "^4.4.0",
+        "swoop-ui": "git+ssh://git@gitlab.tools.swoop.aero:platform/frontend/sharedui-v2.git#v1.1.22",
+        "timed-memoize": "^2.4.2",
+        "typescript": "^4.1.2",
+        "web-vitals": "^2.1.4"
+    },
+    "scripts": {
+        "git-info": "echo export default \"{\\\"logMessage\\\": \\\"$(git log -1 --oneline | sed 's|\\\"|\\\\\"|g' )\\\"}\"  > src/_git_commit.js",
+        "start": "yarn git-info; react-scripts --max_old_space_size=4096 start",
+        "build": "yarn git-info; react-scripts --max_old_space_size=4096 build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "prepare": "husky install"
+    },
+    "lint-staged": {
+        "*.{js,jsx,ts,tsx,json,css,scss,md}": "prettier --write .",
+        "*.{js,ts,tsx,json}": "eslint . --ext .ts,.tsx,.js --fix"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@types/ol": "^6.5.3",
+        "@types/uuid": "^8.3.4",
+        "@typescript-eslint/eslint-plugin": "5.5.0",
+        "@typescript-eslint/parser": "^5.5.0",
+        "eslint": "^7.11.0",
+        "husky": "^7.0.4",
+        "lint-staged": "^12.1.2",
+        "prettier": "^2.5.0"
+    },
+    "homepage": "/supervisor"
+}
